@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMaster Pro</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #f06, #4a90e2);
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-section p {
+            font-size: 1.5rem;
+        }
+
+        .hero-section .btn {
+            margin-top: 20px;
+        }
+
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: bold;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .navbar-brand:hover {
+            transform: translateX(-50%) scale(1.1);
+            color: #fff;
+        }
+
+        .cta {
+            background-color: #6f42c1;
+            color: white;
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        .cta .btn-primary {
+            background-color: white;
+            color: #6f42c1;
+            border: none;
+        }
+
+        .cta .btn-primary:hover {
+            background-color: #ddd;
+            color: #6f42c1;
+        }
+
+        footer {
+            background-color: #6f42c1;
+            color: white;
+            padding: 20px 0;
+        }
+
+        footer a {
+            color: white;
+        }
+
+        .todo-section {
+            padding: 50px 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .todo-form {
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .todo-form input {
+            width: 80%;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+            padding: 10px;
+            border-radius: 20px;
+        }
+
+        .todo-form button {
+            font-size: 1.5rem;
+            padding: 10px 30px;
+            border-radius: 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .todo-form button:hover {
+            background-color: #218838;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .task-count {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        .task-count-box {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background-color: #6f42c1;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        .todo-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .list-group-item {
+            width: 80%;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            color: #000;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .list-group-item:hover {
+            transform: scale(1.02);
+            background-color: #f8f9fa;
+        }
+
+        .completed-task {
+            text-decoration: line-through;
+            color: grey;
+        }
+
+        .navbar-nav {
+            margin-left: auto;
+        }
+
+        .navbar-nav .nav-link {
+            color: white;
+        }
+
+        .todo-form input:focus,
+        .todo-form button:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .todo-section h2 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s;
+        }
+
+        .todo-form,
+        .todo-list,
+        .task-count {
+            animation: fadeInUp 1s;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .animated-heading {
+            animation: pulse 2s infinite;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #f06, #4a90e2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hover-animate {
+            transition: all 0.3s;
+        }
+
+        .hover-animate:hover {
+            transform: scale(1.1);
+        }
+
+        .decorative-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .decorative-elements div {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 10s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-50px) translateX(50px) scale(1.5);
+            }
+
+            100% {
+                transform: translateY(0) translateX(0) scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">TaskMaster Pro by DevOps Shack</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#demo">Demo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="decorative-elements">
+            <div style="top: 20%; left: 10%;"></div>
+            <div style="top: 40%; left: 20%;"></div>
+            <div style="top: 60%; left: 30%;"></div>
+            <div style="top: 80%; left: 40%;"></div>
+            <div style="top: 20%; right: 10%;"></div>
+            <div style="top: 40%; right: 20%;"></div>
+            <div style="top: 60%; right: 30%;"></div>
+            <div style="top: 80%; right: 40%;"></div>
+        </div>
+        <div class="container">
+            <h1 class="display-4">Master Your Tasks with TaskMaster Pro</h1>
+            <p>Streamline your productivity and achieve more every day</p>
+            <a href="#" class="btn btn-primary btn-lg">Try It Now</a>
+        </div>
+    </section>
+
+    <!-- To-Do Section -->
+    <section id="demo" class="todo-section">
+        <div class="container">
+            <h2 class="text-center gradient-text animated-heading hover-animate">Start Managing Tasks</h2>
+            <div class="todo-form">
+                <form id="todoForm" onsubmit="addTask(event)">
+                    <input type="text" id="task" name="task" class="form-control mb-2 mr-sm-2" placeholder="Enter new task" style="width: 80%;">
+                    <button type="submit" class="btn btn-success mb-2">Add</button>
+                </form>
+            </div>
+            <ul id="todoList" class="list-group todo-list"></ul>
+            <div class="task-count">
+                <div class="task-count-box">Total tasks: <span id="taskCount">0</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Get Started with TaskMaster Pro</h2>
+            <p>Join thousands of users who have transformed their productivity.</p>
+            <a href="/signup" class="btn btn-primary btn-lg">Sign Up Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2024 TaskMaster Pro. All rights reserved.</p>
+            <p>
+                <a href="#">About</a> |
+                <a href="#">Contact</a> |
+                <a href="#">Privacy Policy</a> |
+                <a href="#">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function addTask(event) {
+            event.preventDefault();
+            const taskInput = document.getElementById('task');
+            const taskList = document.getElementById('todoList');
+            const taskCount = document.getElementById('taskCount');
+
+            if (taskInput.value.trim() === '') {
+                return;
+            }
+
+            const newTask = document.createElement('li');
+            newTask.className = 'list-group-item d-flex justify-content-between align-items-center';
+            newTask.innerHTML = `
+                <span>${taskInput.value}</span>
+                <div>
+                    <button class="btn btn-success btn-sm" onclick="completeTask(this)">
+                        <i class="fas fa-check"></i>
+                    </button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteTask(this)">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+
+            taskList.appendChild(newTask);
+            taskInput.value = '';
+            taskCount.textContent = parseInt(taskCount.textContent) + 1;
+        }
+
+        function completeTask(button) {
+            const taskItem = button.closest('li');
+            const taskText = taskItem.querySelector('span');
+            taskText.classList.toggle('completed-task');
+            button.disabled = true;
+        }
+
+        function deleteTask(button) {
+            const taskItem = button.closest('li');
+            taskItem.remove();
+            const taskCount = document.getElementById('taskCount');
+            taskCount.textContent = parseInt(taskCount.textContent) - 1;
+        }
+    </script>
+</body>
+
+</html>
+
