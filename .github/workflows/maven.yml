@@ -45,4 +45,14 @@ jobs:
     - name: Trivy image scan
       run: trivy image --format table -o image.html adijaiswal/taskmaster:latest
 
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Push Docker Image
+      run: |
+          docker push adijaiswal/taskmaster:latest
+
     
