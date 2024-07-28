@@ -32,4 +32,17 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build Docker Image
+      run: |
+        docker build -t adijaiswal/taskmaster:latest .
+
+    - name: Trivy image scan
+      run: trivy image --format table -o image.html adijaiswal/taskmaster:latest
+
     
