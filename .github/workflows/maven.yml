@@ -23,4 +23,7 @@ jobs:
     - name: Build with Maven
       run: mvn package --file pom.xml
 
+    - name: Trivy fs scan
+      run: trivy fs --format table -o fs.report .
+
     
