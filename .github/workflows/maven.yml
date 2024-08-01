@@ -4,9 +4,9 @@ name: CDPROD
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: [ "feature-branch" ]
+  #pull_request:
+    #branches: [ "feature-branch" ]
 
 jobs:
   build:
