@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: taskmaster
-          image: ganeshsnp987/taskmaster:latest # Image that will be used to containers in the cluster
+          image: ganeshsnp987/dev-taskmaster:latest # Image that will be used to containers in the cluster
           imagePullPolicy: Always
           ports:
             - containerPort: 8080 # The port that the container is running on in the cluster
