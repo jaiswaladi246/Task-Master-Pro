@@ -55,5 +55,5 @@ jobs:
     - name: Deploy
       uses: danielr1996/kubectl-action@1.0.0
       with:
-        base64-kube-config: ${{ secrets.KUBE_CONFIG }}
-        args: apply -f deployment-service.yaml
+        kubeconfig: ${{ secrets.KUBE_CONFIG }}
+    - run: kubectl apply -f deployment-service.yaml
