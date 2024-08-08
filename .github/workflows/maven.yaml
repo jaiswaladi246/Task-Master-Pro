@@ -1,3 +1,4 @@
+
 name: CICD
 
 on:
@@ -12,21 +13,18 @@ jobs:
     runs-on: self-hosted
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
-
+    - uses: actions/checkout@v4
     - name: Set up JDK 17
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@v3
       with:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-
     - name: Build with Maven
       run: mvn package --file pom.xml
 
-    - name: Trivy FS Scan
-      run: trivy fs . --format table -o trivyfs.html
+    - name: Trivy FS scan
+      run: trivy fs --format table -o fs.html .
 
     - name: SonarQube Scan
       uses: sonarsource/sonarqube-scan-action@master
@@ -41,24 +39,28 @@ jobs:
       uses: docker/setup-buildx-action@v3
 
     - name: Build Docker Image
-      run: docker build -t ganeshsnp987/dev-taskmaster:latest .
+      run: |
+        docker build -t ganeshsnp987/devtaskmaster:latest .
 
-    - name: Trivy Image Scan
-      run: trivy image ganeshsnp987/dev-taskmaster:latest --format table -o trivyimage.html
+    - name: Trivy Image scan
+      run: trivy image --format table -o image.html ganeshsnp987/devtaskmaster:latest
 
     - name: Login to Docker Hub
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Push Docker image 
-      run: docker push ganeshsnp987/dev-taskmaster:latest
+    - name: Push Docker Image
+      run: |
+          docker push ganeshsnp987/devtaskmaster:latest
 
     - name: Kubectl Action
       uses: tale/kubectl-action@v1
       with:
-        base64-kube-config: ${{ secrets.KUBE_CONFIG_PROD }}
+        base64-kube-config: ${{ secrets.KUBE_CONFIG }}
     - run: |
           kubectl apply -f deployment-service.yml
-      
+
+    
+   
