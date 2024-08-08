@@ -52,8 +52,8 @@ jobs:
     - name: Push Docker image 
       run: docker push ganeshsnp987/dev-taskmaster:latest
 
-    - name: Deploy
-      uses: danielr1996/kubectl-action@1.0.0
+    - name: k8s Deploy
+      uses: tale/kubectl-action@v1
       with:
         kubeconfig: ${{ secrets.KUBE_CONFIG }}
     - run: kubectl apply -f deployment-service.yaml
