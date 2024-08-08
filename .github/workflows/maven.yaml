@@ -55,12 +55,9 @@ jobs:
     - name: Push Docker image 
       run: docker push ganeshsnp987/dev-taskmaster:latest
 
-    - name: Set up kubectl
-      uses: azure/setup-kubectl@v1
+    - name: Kubectl Action
+      uses: tale/kubectl-action@v1
       with:
-        version: 'latest'
-    
-    - name: Deploy to Kubernetes
-      env:
-        KUBECONFIG: ${{ secrets.KUBE_CONFIG }}
-      run: kubectl apply -f deployment-service.yml
+        base64-kube-config: ${{ secrets.KUBE_CONFIG_PROD }}
+    - run: |
+          kubectl apply -f deployment-service.yml
