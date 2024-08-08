@@ -55,9 +55,8 @@ jobs:
     - name: Push Docker image 
       run: docker push ganeshsnp987/dev-taskmaster:latest
 
-    - name: Kubectl Action
-      uses: tale/kubectl-action@v1
-      with:
-        base64-kube-config: ${{ secrets.KUBE_CONFIG_PROD }}
-    - run: |
-          kubectl apply -f deployment-service.yml
+    - name: Create kubeconfig
+      run: echo "${{ secrets.KUBE_CONFIG }}" | base64 --decode > $HOME/.kube/config
+
+    - name: Deploy to Kubernetes
+      run: kubectl apply -f deployment-service.yaml
