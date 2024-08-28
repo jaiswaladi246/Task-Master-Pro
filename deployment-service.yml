@@ -14,13 +14,10 @@ spec:
     spec:
       containers:
         - name: taskmaster
-          image: adijaiswal/devtaskmaster:latest # Image that will be used to containers in the cluster
+          image: sashikumar24/prodtaskmaster:latest # Image that will be used to containers in the cluster
           imagePullPolicy: Always
           ports:
             - containerPort: 8080 # The port that the container is running on in the cluster
-
-
----
 
 apiVersion: v1 # Kubernetes API version
 kind: Service # Kubernetes resource kind we are creating

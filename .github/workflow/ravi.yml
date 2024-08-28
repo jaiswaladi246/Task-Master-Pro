@@ -1,4 +1,3 @@
-
 name: CICD
 
 on:
@@ -40,10 +39,10 @@ jobs:
 
     - name: Build Docker Image
       run: |
-        docker build -t adijaiswal/devtaskmaster:latest .
+        docker build -t sashikumar24/devtaskmaster:latest .
 
     - name: Trivy Image scan
-      run: trivy image --format table -o image.html adijaiswal/devtaskmaster:latest
+      run: trivy image --format table -o image.html sashikumar24/devtaskmaster:latest
 
     - name: Login to Docker Hub
       uses: docker/login-action@v3
@@ -53,7 +52,7 @@ jobs:
 
     - name: Push Docker Image
       run: |
-          docker push adijaiswal/devtaskmaster:latest
+          docker push sashikumar24/devtaskmaster:latest
 
     - name: Kubectl Action
       uses: tale/kubectl-action@v1
@@ -61,6 +60,3 @@ jobs:
         base64-kube-config: ${{ secrets.KUBE_CONFIG }}
     - run: |
           kubectl apply -f deployment-service.yml
-
-    
-   
