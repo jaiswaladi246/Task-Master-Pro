@@ -1,5 +1,4 @@
 
-
 ### **Updated Steps for Service Account and Role Creation**
 
 1. **Create the Service Account**:
@@ -12,7 +11,6 @@
      namespace: webapps
    ```
 
----
 
 2. **Create Role for Namespace-Scoped Permissions**:
    Define a `Role` for namespace-specific resources (e.g., PVCs, Deployments):
@@ -40,8 +38,6 @@
        verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
    ```
 
----
-
 3. **Bind the Role to the Service Account**:
    Attach the `Role` to the `jenkins` service account:
    ```yaml
@@ -59,8 +55,6 @@
        name: jenkins
        namespace: webapps
    ```
-
----
 
 4. **Create ClusterRole for Cluster-Scoped Resources**:
    Add a `ClusterRole` for cluster-scoped resources like PVs and StorageClasses:
@@ -80,8 +74,6 @@
        verbs: ["get", "list", "watch"]
    ```
 
----
-
 5. **Bind the ClusterRole to the Service Account**:
    Create a `ClusterRoleBinding` to attach the `ClusterRole` to the `jenkins` service account:
    ```yaml
@@ -100,14 +92,5 @@
    ```
 
 
-
-
-
-
-### **Validation**
-1. **Test Namespace Access**:
-   Log in with the Jenkins token and try creating resources like PVCs or Deployments in the `webapps` namespace.
-2. **Test Cluster Resource Access**:
-   Use the token to create or list PersistentVolumes and verify that it works.
-
-Let me know if you need further clarification or assistance!
+### Generate token using service account in the namespace
+[Create Token](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#:~:text=To%20create%20a%20non%2Dexpiring,with%20that%20generated%20token%20data.)
